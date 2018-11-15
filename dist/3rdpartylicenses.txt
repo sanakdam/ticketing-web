@@ -146,6 +146,10 @@ MIT
 MIT
 MIT
 
+@angular/http@5.2.11
+MIT
+MIT
+
 ngx-barcode-scanner@0.0.5
 MIT
 MIT
@@ -155,6 +159,10 @@ MIT
 MIT
 
 @angular/forms@5.2.11
+MIT
+MIT
+
+@angular/router@5.2.11
 MIT
 MIT
 
