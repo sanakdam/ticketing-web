@@ -15,7 +15,7 @@ export class CountingComponent implements OnInit {
 
   ngOnInit() {
     // this.count()
-    // this.playBuup()
+    this.playBeep()
   }
 
   setHeader(options: RequestOptions) {

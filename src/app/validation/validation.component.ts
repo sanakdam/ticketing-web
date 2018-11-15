@@ -15,6 +15,7 @@ export class ValidationComponent implements OnInit, AfterViewInit {
   	constructor(private http: Http) { }
 
 	ngOnInit() {
+        this.playBeep()
 	}
 
     @ViewChild(BarecodeScannerLivestreamComponent)
