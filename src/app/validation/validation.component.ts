@@ -56,10 +56,10 @@ export class ValidationComponent implements OnInit, AfterViewInit {
         .map((res: Response) => res.json())
         .subscribe(res => {
             this.playBeep()
-            alert("Validasi berhasil!");
+            return alert("Validasi berhasil!");
         }, (err) => {
-            alert("Validasi gagal!");
             this.playBuup()
+            return alert("Tiket tidak ditemukan!");
         });
     }
 }
