@@ -50,15 +50,15 @@ export class ValidationComponent implements OnInit, AfterViewInit {
 
         const options = new RequestOptions();
         this.setHeader(options);
-        this.payload['code'] = this.barcodeValue
+        this.payload['code'] = value.code;
 
         this.http.post('http://101.50.2.59:3031/ticket-validate', this.payload, options)
         .map((res: Response) => res.json())
         .subscribe(res => {
-            console.log(res)
             this.playBeep()
+            alert("Validasi berhasil!");
         }, (err) => {
-            console.log(err)
+            alert("Validasi gagal!");
             this.playBuup()
         });
     }
