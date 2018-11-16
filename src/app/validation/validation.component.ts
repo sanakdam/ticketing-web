@@ -29,20 +29,26 @@ export class ValidationComponent implements OnInit, AfterViewInit {
 
     setHeader(options: RequestOptions) {
         const headers = new Headers();
-        headers.append('Content-Type', `application/json`);
+        headers.append('Content-Type', `application/json; charset=utf-8`);
         options.headers = headers;
     }
 
     playBeep() {
-        this.audio.src = "./assets/beep.mp3"
-        this.audio.load()
-        this.audio.play()
+        return new Promise((resolve, reject) => {
+            this.audio.src = "./assets/beep.mp3"
+            this.audio.load()
+            this.audio.play()
+            resolve()
+        })
     }
 
     playBuup() {
-        this.audio.src = "./assets/buup.mp3"
-        this.audio.load()
-        this.audio.play()
+        return new Promise((resolve, reject) => {
+            this.audio.src = "./assets/buup.mp3"
+            this.audio.load()
+            this.audio.play()
+            resolve()
+        })
     }
  
     onValueChanges(value){
@@ -55,11 +61,13 @@ export class ValidationComponent implements OnInit, AfterViewInit {
         this.http.post('http://101.50.2.59:3031/ticket-validate', this.payload, options)
         .map((res: Response) => res.json())
         .subscribe(res => {
-            this.playBeep()
-            return alert("Validasi berhasil!");
+            return this.playBeep().then(() => {
+                alert("Validasi berhasil!")
+            })
         }, (err) => {
-            this.playBuup()
-            return alert("Tiket tidak ditemukan!");
+            return this.playBuup().then(() => {
+                alert("Tiket tidak ditemukan!")
+            }) 
         });
     }
 }
