@@ -2,6 +2,8 @@ import { Component, ViewChild, AfterViewInit, OnInit } from '@angular/core';
 import { BarecodeScannerLivestreamComponent } from 'ngx-barcode-scanner';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/map';
+import { debounceTime } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-validation',
@@ -11,8 +13,31 @@ import 'rxjs/add/operator/map';
 export class ValidationComponent implements OnInit, AfterViewInit {
     audio = new Audio();
     payload = {} as any;
+    mySubject = new Subject();
 
-  	constructor(private http: Http) { }
+  	constructor(private http: Http) {
+        this.mySubject
+        .debounceTime(800)
+        .subscribe(value => {
+            this.barcodeValue = value;
+
+            const options = new RequestOptions();
+            this.setHeader(options);
+            this.payload['code'] = value;
+
+            this.http.post('http://101.50.2.59:3031/ticket-validate', this.payload, options)
+            .map((res: Response) => res.json())
+            .subscribe(res => {
+                return this.playBeep().then(() => {
+                    alert("Validasi berhasil!")
+                })
+            }, (err) => {
+                return this.playBuup().then(() => {
+                    alert("Tiket tidak ditemukan!")
+                }) 
+            });
+        });
+    }
 
 	ngOnInit() {
         this.playBeep()
@@ -52,22 +77,6 @@ export class ValidationComponent implements OnInit, AfterViewInit {
     }
  
     onValueChanges(value){
-        this.barcodeValue = value.code;
-
-        const options = new RequestOptions();
-        this.setHeader(options);
-        this.payload['code'] = value.code;
-
-        this.http.post('http://101.50.2.59:3031/ticket-validate', this.payload, options)
-        .map((res: Response) => res.json())
-        .subscribe(res => {
-            return this.playBeep().then(() => {
-                alert("Validasi berhasil!")
-            })
-        }, (err) => {
-            return this.playBuup().then(() => {
-                alert("Tiket tidak ditemukan!")
-            }) 
-        });
+        this.mySubject.next(value.code);
     }
 }

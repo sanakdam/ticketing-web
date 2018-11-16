@@ -4,11 +4,11 @@ import 'rxjs/add/operator/map';
 import { StorageService } from '../storage.service';
 
 @Component({
-  selector: 'app-counting',
-  templateUrl: './counting.component.html',
-  styleUrls: ['./counting.component.css']
+  selector: 'app-decrease',
+  templateUrl: './decrease.component.html',
+  styleUrls: ['./decrease.component.css']
 })
-export class CountingComponent implements OnInit {
+export class DecreaseComponent implements OnInit {
   audio = new Audio();
   payload = {} as any;
   number = 0
@@ -43,7 +43,7 @@ export class CountingComponent implements OnInit {
     const options = new RequestOptions();
     this.setHeader(options);
 
-    this.http.get('http://192.168.1.7:3000/counting', options)
+    this.http.get('http://192.168.1.7:3000/decrease', options)
       .map((res: Response) => res.json())
       .subscribe(res => {
          this.number = res['data'];
