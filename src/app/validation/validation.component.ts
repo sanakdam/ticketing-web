@@ -17,7 +17,7 @@ export class ValidationComponent implements OnInit, AfterViewInit {
 
   	constructor(private http: Http) {
         this.mySubject
-        .debounceTime(800)
+        .debounceTime(500)
         .subscribe(value => {
             this.barcodeValue = value;
 
@@ -25,7 +25,7 @@ export class ValidationComponent implements OnInit, AfterViewInit {
             this.setHeader(options);
             this.payload['code'] = value;
 
-            this.http.post('http://101.50.2.59:3031/ticket-validate', this.payload, options)
+            this.http.post('http://127.0.0.1:3000/validate', this.payload, options)
             .map((res: Response) => res.json())
             .subscribe(res => {
                 return this.playBeep().then(() => {
@@ -33,7 +33,7 @@ export class ValidationComponent implements OnInit, AfterViewInit {
                 })
             }, (err) => {
                 return this.playBuup().then(() => {
-                    alert("Tiket tidak ditemukan!")
+                    alert("Tiket tidak ditemukan atau sudah melakukan validasi!")
                 }) 
             });
         });

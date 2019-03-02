@@ -43,7 +43,7 @@ export class DecreaseComponent implements OnInit {
     const options = new RequestOptions();
     this.setHeader(options);
 
-    this.http.get('http://192.168.1.7:3000/decrease', options)
+    this.http.get('http://192.168.1.9:3000/decrease', options)
       .map((res: Response) => res.json())
       .subscribe(res => {
          this.number = res['data'];
