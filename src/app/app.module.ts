@@ -9,9 +9,11 @@ import { ValidationComponent } from './validation/validation.component';
 import { CountingComponent } from './counting/counting.component';
 import { AppRoutingModule } from './/app-routing.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { ZXingScannerModule } from '@zxing/ngx-scanner';
 
 import { StorageService } from './storage.service';
 import { DecreaseComponent } from './decrease/decrease.component';
+import { ScanComponent } from './scan/scan.component';
 
 
 @NgModule({
@@ -20,13 +22,15 @@ import { DecreaseComponent } from './decrease/decrease.component';
     ValidationComponent,
     CountingComponent,
     DashboardComponent,
-    DecreaseComponent
+    DecreaseComponent,
+    ScanComponent,
   ],
   imports: [
     BrowserModule,
     BarecodeScannerLivestreamModule,
     AppRoutingModule,
-    HttpModule
+    HttpModule,
+    ZXingScannerModule.forRoot()
   ],
   providers: [StorageService],
   bootstrap: [AppComponent]

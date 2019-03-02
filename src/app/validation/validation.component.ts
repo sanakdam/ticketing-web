@@ -25,7 +25,7 @@ export class ValidationComponent implements OnInit, AfterViewInit {
             this.setHeader(options);
             this.payload['code'] = value;
 
-            this.http.post('http://127.0.0.1:3000/validate', this.payload, options)
+            this.http.post('http://52.221.208.55:3000/validate', this.payload, options)
             .map((res: Response) => res.json())
             .subscribe(res => {
                 return this.playBeep().then(() => {
