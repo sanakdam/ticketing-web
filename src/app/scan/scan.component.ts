@@ -69,7 +69,7 @@ export class ScanComponent implements OnInit {
         const options = new RequestOptions();
         this.setHeader(options);
 
-        this.http.post('http://101.50.2.59:8087/validate', {
+        this.http.post('https://api.marung.gumcode.net/validate', {
             code: resultString
         }, options)
         .map((res: Response) => res.json())
