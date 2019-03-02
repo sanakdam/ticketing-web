@@ -15,6 +15,14 @@ import { StorageService } from './storage.service';
 import { DecreaseComponent } from './decrease/decrease.component';
 import { ScanComponent } from './scan/scan.component';
 
+import { environment } from '../environments/environment';
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+import { AngularFireMessagingModule } from 'angularfire2/messaging';
+import { MessagingService } from './messaging.service';
+
+
 
 @NgModule({
   declarations: [
@@ -30,9 +38,14 @@ import { ScanComponent } from './scan/scan.component';
     BarecodeScannerLivestreamModule,
     AppRoutingModule,
     HttpModule,
-    ZXingScannerModule.forRoot()
+    ZXingScannerModule.forRoot(),
+
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireDatabaseModule,
+    AngularFireAuthModule, 
+    AngularFireMessagingModule,
   ],
-  providers: [StorageService],
+  providers: [StorageService, MessagingService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

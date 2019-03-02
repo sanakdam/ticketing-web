@@ -3,6 +3,7 @@ import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 import 'rxjs/add/operator/share'
 import { StorageService } from '../storage.service';
+import { MessagingService } from "../messaging.service";
 
 @Component({
   selector: 'app-dashboard',
@@ -11,8 +12,13 @@ import { StorageService } from '../storage.service';
 })
 export class DashboardComponent implements OnInit {
   number = 0
+  message;
+  data: any;
 
-  constructor(private storageService: StorageService) {
+  constructor(
+      private storageService: StorageService,
+      private msgService: MessagingService
+      ) {
   }
 
   ngOnInit() {
@@ -20,5 +26,13 @@ export class DashboardComponent implements OnInit {
     window.addEventListener("storage", ()=> {
       this.number = Number(localStorage.getItem('number'))
     });
+
+    this.message = this.msgService.currentMessage
+      
+      this.message.subscribe((message) => {
+         if(message != null) {
+            this.data = message.data
+         }
+      })
   }
 }
