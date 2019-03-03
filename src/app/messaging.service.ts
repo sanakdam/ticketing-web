@@ -26,7 +26,7 @@ export class MessagingService {
 
     setHeader(options: RequestOptions) {
         const headers = new Headers();
-        headers.append('Content-Type', `application/json; charset=utf-8`);
+        headers.append('Content-Type', `application/json`);
         options.headers = headers;
     }
 
