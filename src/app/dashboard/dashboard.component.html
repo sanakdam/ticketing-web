@@ -1,8 +1,13 @@
 <div class="container">
-	<div class="row row-full" style="text-align:center;">
-		<h3 class="selamat-datang">Selamat Datang!</h3>
-
-        <h1 *ngIf="data" class="data-outlet">"{{data.outlet}}"</h1>
-        <h5 *ngIf="data" class="meja-anda">Meja Anda <b class="data-table">{{data.table}}</b></h5>
+	<div class="row text-center pd-20">
+        <div class="col-md-12">
+            <span class="selamat-datang">Selamat Datang!</span>
+        </div>
+        <div class="col-md-12">
+            <span *ngIf="data" class="data-outlet">"{{data.outlet}}"</span>
+        </div>
+        <div class="col-md-12">
+            <span *ngIf="data" class="meja-anda">Meja Anda <b class="data-table">{{data.table}}</b></span>
+        </div>
     </div>
 </div>
