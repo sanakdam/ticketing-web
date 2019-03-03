@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Http, Response, Headers, RequestOptions } from '@angular/http';
 
 @Component({
   selector: 'app-tiket',
@@ -6,71 +7,59 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./tiket.component.css']
 })
 export class TiketComponent implements OnInit {
-  title = 'app works!';
-  games = [
-    {
-      "id":"1",
-      "name": "DOTA 2",
-      "genre": "Strategy"
-    },
-    {
-      "id":"2",
-      "name": "AOE 3",
-      "genre": "Strategy"
-    },
-    {
-      "id":"3",
-      "name": "GTA 5",
-      "genre": "RPG"
-    },
-    {
-      "id":"4",
-      "name": "Far Cry 3",
-      "genre": "Action"
-    },
-    {
-      "id":"5",
-      "name": "GTA San Andreas",
-      "genre": "RPG"
-    },
-    {
-      "id":"6",
-      "name": "Hitman",
-      "genre": "Action"
-    },
-    {
-      "id":"7",
-      "name": "NFS MW",
-      "genre": "Sport"
-    },{
-      "id":"8",
-      "name": "Fifa 16",
-      "genre": "Sport"
-    },{
-      "id":"9",
-      "name": "NFS Sen 2",
-      "genre": "Sport"
-    },{
-      "id":"10",
-      "name": "Witcher Assasins on King",
-      "genre": "Adventure"
+    title = 'app works!';
+    games = []
+    key: string = 'outlet';
+    reverse: boolean = false;
+    filter: any;
+  
+    sort(key){
+        this.key = key;
+        this.reverse = !this.reverse;
     }
-  ]
-  key: string = 'name'; //set default
-  reverse: boolean = false;
+
+    //initializing p to one
+    p: number = 1;
   
-  sort(key){
-    this.key = key;
-    this.reverse = !this.reverse;
-  }
+    constructor(private http: Http) {
+    }
 
-  //initializing p to one
-  p: number = 1;
-  filter = {} as any;
-  
-  constructor() { }
+    ngOnInit() {
+        this.fetchData()
+    }
 
-  ngOnInit() {
-  }
+    setHeader(options: RequestOptions) {
+        const headers = new Headers();
+        headers.append('Content-Type', `application/json`);
+        options.headers = headers;
+    }
 
-}
+    fetchData() {
+        const options = new RequestOptions();
+        this.setHeader(options);
+
+        this.http.get('https://api.marung.gumcode.net/ticket', options)
+        .map((res: Response) => res.json())
+        .subscribe(res => {
+            this.games = res['data']
+        }, (err) => {
+        });
+    }
+
+    onVerify(resultString: string) {
+        const options = new RequestOptions();
+        this.setHeader(options);
+
+        this.http.post('https://api.marung.gumcode.net/validate', {
+            code: resultString
+        }, options)
+        .map((res: Response) => res.json())
+        .subscribe(res => {
+            this.fetchData()
+            alert("Validasi berhasil!")
+        }, (err) => {
+            this.fetchData()
+            alert("Data tiket tidak ditemukan!")
+        });
+    }
+}    

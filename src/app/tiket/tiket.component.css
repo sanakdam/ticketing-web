@@ -1,3 +1,7 @@
 thead>tr>th {
     cursor: pointer;
 }
+
+.btn-warning {
+    border-radius: 50% !important;
+}
