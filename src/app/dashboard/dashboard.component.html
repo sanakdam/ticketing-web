@@ -1,8 +1,8 @@
 <div class="container">
 	<div class="row row-full" style="text-align:center;">
-		<h3 style="font-size: 70px; font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif">Selamat Datang!</h3>
+		<h3 class="selamat-datang">Selamat Datang!</h3>
 
-        <h1 *ngIf="data" style="font-size: 110px; color: #16A2B7; font-family: sans-serif">"{{data.outlet}}"</h1>
-        <h5 *ngIf="data" style="font-size: 50px; font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif">Meja Anda <b style="color: #16A2B7;">{{data.table}}</b></h5>
+        <h1 *ngIf="data" class="data-outlet">"{{data.outlet}}"</h1>
+        <h5 *ngIf="data" class="meja-anda">Meja Anda <b class="data-table">{{data.table}}</b></h5>
     </div>
 </div>

@@ -3,6 +3,25 @@
  min-height: 400px;
 }
 
+.selamat-datang {
+    font-size: 70px; 
+    font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
+}
+
+.data-outlet {
+    font-size: 110px; 
+    color: #16A2B7; font-family: sans-serif;
+}
+
+.data-table {
+    color: #16A2B7;
+}
+
+.meja-anda {
+    font-size: 50px; 
+    font-family: Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
+}
+
 /*Can achive using vw css unit*/
 .row-full{
       width: 100vw;
