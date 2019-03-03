@@ -21,18 +21,20 @@ export class DashboardComponent implements OnInit {
       ) {
   }
 
-  ngOnInit() {
-    this.number = Number(localStorage.getItem('number'))
-    window.addEventListener("storage", ()=> {
-      this.number = Number(localStorage.getItem('number'))
-    });
+    ngOnInit() {
+        this.number = Number(localStorage.getItem('number'))
+            window.addEventListener("storage", ()=> {
+            this.number = Number(localStorage.getItem('number'))
+        });
 
-    this.message = this.msgService.currentMessage
+        this.msgService.getPermission()
+        this.msgService.receiveMessage()
+        this.message = this.msgService.currentMessage
       
-      this.message.subscribe((message) => {
-         if(message != null) {
-            this.data = message.data
-         }
-      })
-  }
+        this.message.subscribe((message) => {
+            if(message != null) {
+                this.data = message.data
+            }
+        })
+    }
 }
