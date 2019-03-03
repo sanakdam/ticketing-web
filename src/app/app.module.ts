@@ -21,8 +21,10 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireMessagingModule } from 'angularfire2/messaging';
 import { MessagingService } from './messaging.service';
-
-
+import { TiketComponent } from './tiket/tiket.component';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { Ng2OrderModule } from 'ng2-order-pipe';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -32,6 +34,7 @@ import { MessagingService } from './messaging.service';
     DashboardComponent,
     DecreaseComponent,
     ScanComponent,
+    TiketComponent,
   ],
   imports: [
     BrowserModule,
@@ -39,6 +42,9 @@ import { MessagingService } from './messaging.service';
     AppRoutingModule,
     HttpModule,
     ZXingScannerModule.forRoot(),
+    Ng2SearchPipeModule,
+    Ng2OrderModule,
+    NgxPaginationModule,
 
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
